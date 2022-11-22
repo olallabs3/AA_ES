@@ -12,8 +12,8 @@ class Program
         try{
 
             var VideoJuego1 = new VideoJuego ("Apex Legends",3,10.99m);
-            var VideoJuego2 = new VideoJuego ("Payaso Esponja Horror Horripilante Abuelita miedo",100,12m);
-            var VideoJuego3 = new VideoJuego ("Crysis 2",5,30m);
+            var VideoJuego2 = new VideoJuego ("Payaso Esponja Horror Horripilante Abuelita miedo",100,12.00m);
+            var VideoJuego3 = new VideoJuego ("Crysis 2",5,30.00m);
             var VideoJuego4 = new VideoJuego ("Victoria 3",10,59.99m);
 
             catalogo.Add(VideoJuego1);
@@ -154,7 +154,7 @@ class Program
 
             for (int i = 0; i < v.Count; i++){
                 var item = v[i];
-                Console.WriteLine($"{item.Id} \t {item.Titulo} \t {item.Unidades} \t {item.PrecioVenta}");
+                Console.WriteLine($"{item.Id} \t {item.Titulo} \t {item.Unidades} \t\t {item.PrecioVenta}");
             }
             
             menu();

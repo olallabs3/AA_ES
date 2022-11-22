@@ -10,10 +10,10 @@ namespace AA_ES;
         public string Titulo { get; set; }
         public int Unidades {get; set;}
         public decimal PrecioVenta { get; set; }
+        public Boolean agotado {get; set;}
 
         //public decimal PrecioCompra { get; set; }
         //private List<Categoria> categorias = new List<Categoria>();
-        //public Boolean adulto {get; set; }
 
         private static int accountNumberSeed = 1;
 
@@ -24,8 +24,10 @@ namespace AA_ES;
             this.Id = accountNumberSeed.ToString();
             accountNumberSeed++;
             this.Titulo = nombre;
+            this.Unidades = unidades;
             this.PrecioVenta = precio;
             ComprarJuego(unidades, DateTime.Now, " cantidad");
+            this.agotado = false;
         }
 
         public void ComprarJuego(int unidades, DateTime date, string note)
@@ -51,6 +53,10 @@ namespace AA_ES;
             }
             var venta = new Transaction(-unidades, date);
             allTransactions.Add(venta);
+
+            if (unidades == 0){
+               this.agotado = true;
+            }
         }
 
         public string GetHistory()
