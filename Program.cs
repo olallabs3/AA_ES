@@ -154,7 +154,9 @@ class Program
 
             for (int i = 0; i < v.Count; i++){
                 var item = v[i];
+                if (item.agotado == false){
                 Console.WriteLine($"{item.Id} \t {item.Titulo} \t {item.Unidades} \t\t {item.PrecioVenta}");
+                }
             }
             
             menu();
