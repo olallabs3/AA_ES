@@ -154,9 +154,10 @@ class Program
 
             for (int i = 0; i < v.Count; i++){
                 var item = v[i];
+                if (item.agotado ==false){
                 Console.WriteLine($"{item.Id} \t {item.Titulo} \t {item.Unidades} \t\t {item.PrecioVenta}");
+                }
             }
-            
             menu();
         }
         /* Creo que no lo llego a usar, es menu2
@@ -176,7 +177,6 @@ class Program
             nota_añadir = Console.ReadLine();
 
             v.ComprarJuego(añadido, DateTime.Now, nota_añadir);
-
             menu_2(v); //El problema es que está metido en una función aparte
         }
 
@@ -191,7 +191,7 @@ class Program
             nota_gasto = Console.ReadLine();
 
             v.VenderJuego(gasto, DateTime.Now, nota_gasto);
-
+                
             menu_2(v);
         }
         
