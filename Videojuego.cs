@@ -23,22 +23,62 @@ namespace AA_ES;
         {
             this.Id = accountNumberSeed.ToString();
             accountNumberSeed++;
-            this.Titulo = nombre;
-            this.Unidades = 0;
-            this.PrecioVenta = precio;
-            ComprarJuego(unidades, DateTime.Now, " cantidad");
-            this.agotado = false;
+
+            //Control de que el campo Título no esté vacío
+            try{
+                if(nombre == "" || nombre == " "){
+                    throw new ArgumentNullException(nameof(nombre), "El campo Título no puede estar vacío.");
+                }else{
+                    this.Titulo = nombre;
+                }
+            }catch (ArgumentNullException e){
+                Console.WriteLine("ArgumentNullException: " + e.ToString());
+            }
+
+            //Control de que el campo Unidades sea negativo 
+            try{
+                if(unidades > 0){
+                    throw new ArgumentOutOfRangeException(nameof(unidades), "El campo de unidades no puede ser menor que 0.");
+                }
+            }catch (ArgumentOutOfRangeException e){
+                Console.WriteLine("ArgumentOutOfRangeException: " + e.ToString());
+            }
+
+            //Control de que el campo Precio sea negativo 
+            try{
+               if (precio <= 0){
+                    throw new ArgumentOutOfRangeException(nameof(unidades), "El campo de unidades no puede ser menor que 0.");
+               }else{
+                    this.PrecioVenta = precio;
+               }
+            }
+            catch (ArgumentOutOfRangeException e){
+                Console.WriteLine("ArgumentOutOfRangeException: " + e.ToString());
+            }
+
+            //Crear registro sin unidades y sin transacciones
+            if (unidades == 0){
+                this.Unidades = 0;
+                this.agotado = true;
+            }else{
+                ComprarJuego(unidades, DateTime.Now, " cantidad");
+                this.agotado = false;
+            }
         }
 
         public void ComprarJuego(int unidades, DateTime date, string note)
         {
-            if (unidades <= 0)
-            {
-                throw new ArgumentOutOfRangeException(nameof(unidades), "No puedes no comprar ningun juego");
+            try{
+                if (unidades <= 0){
+                    throw new ArgumentOutOfRangeException(nameof(unidades), "No puedes no comprar ningun juego");
+                }
+                var compra = new Transaction(unidades, date);
+                allTransactions.Add(compra);
+                this.Unidades += unidades;
+            }catch (System.Exception){
+                
             }
-            var compra = new Transaction(unidades, date);
-            allTransactions.Add(compra);
-            this.Unidades += unidades;
+                
         }
 
         public void VenderJuego(int unidades, DateTime date, string note)
