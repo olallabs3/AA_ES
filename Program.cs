@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+//using NewtonSoft.Json;
 using System.Text.Json;
 using System.Text.RegularExpressions;
 
@@ -10,21 +11,23 @@ class Program
 {
     private static List<VideoJuego> catalogo = new List<VideoJuego>();
     private static bool permiso = false;
+
+    private static string FileName = "./Videojuegos.json";
     private const string pass = "Micontra123";
     static void Main(string[] args)
     {
         try
         {
 
-            var VideoJuego1 = new VideoJuego("Apex Legends", 3, 10.99m);
-            var VideoJuego2 = new VideoJuego("Payaso Esponja Horror Horripilante Abuelita miedo", 100, 12.00m);
-            var VideoJuego3 = new VideoJuego("Crysis 2", 5, 30.00m);
-            var VideoJuego4 = new VideoJuego("Victoria 3", 10, 59.99m);
+            // var VideoJuego1 = new VideoJuego("Apex Legends", 3, 10.99m);
+            // var VideoJuego2 = new VideoJuego("Payaso Esponja Horror Horripilante Abuelita miedo", 100, 12.00m);
+            // var VideoJuego3 = new VideoJuego("Crysis 2", 5, 30.00m);
+            // var VideoJuego4 = new VideoJuego("Victoria 3", 10, 59.99m);
 
-            catalogo.Add(VideoJuego1);
-            catalogo.Add(VideoJuego2);
-            catalogo.Add(VideoJuego3);
-            catalogo.Add(VideoJuego4);
+            // catalogo.Add(VideoJuego1);
+            // catalogo.Add(VideoJuego2);
+            // catalogo.Add(VideoJuego3);
+            // catalogo.Add(VideoJuego4);
 
             menu();
         }
@@ -63,7 +66,8 @@ class Program
                 break;
 
             case "ver":
-                verCatalogo(catalogo);
+                //cargarVideojuegos();
+                // //verCatalogo(catalogo);
 
                 break;
 
@@ -77,7 +81,7 @@ class Program
 
                 break;
 
-            case "busqueda":
+            case "buscar":
                 buscar();
                 break;
             case "salir":
@@ -245,7 +249,7 @@ class Program
 
         Console.WriteLine("\tIndique una pequeña descripción de la operación.");
         nota_añadir = Console.ReadLine();
-
+        //guardarJuego();
         v.ComprarJuego(añadido, DateTime.Now, nota_añadir);
 
         menu_2(v); //El problema es que está metido en una función aparte
@@ -297,4 +301,18 @@ class Program
         string mijson = JsonSerializer.Serialize(catalogo);
         File.WriteAllText("Videojuegos", mijson);
     } // Olalla
+
+
+// public static void guardarJuego (VideoJuego videoj) 
+// {
+//         catalogo.Add(videoj);
+//         string jsonString = System.Text.Json.JsonSerializer.Serialize(videoj);
+//         catalogo.Add(videoj);
+//         catalogo.Remove(videoj);
+// }
+//     public static List<VideoJuego> cargarVideojuegos(){
+//         List<VideoJuego> listaVideojuegos = JsonConvert.DeserializeObject<List<VideoJuego>>(File.ReadAllText(FileName));
+
+//         return listaVideojuegos;
+//     }
 }
