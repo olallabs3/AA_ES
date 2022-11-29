@@ -45,11 +45,11 @@ class Program
     public static void menu()
     {
         Console.Write("¿Qué operación desea hacer?\n" +
-                        "\tVer catálogo (ver).\n" +
+                        "\tVer catálogo disponible (ver).\n" +
                         "\tNueva entrada (crear).\n" +
                         "\tSeleccionar videojuego (seleccionar)\n" +
-                        "\tBuscar juego (busqueda)\n"+
-                        "\tGestiones\n" +
+                        "\tBuscar juego (busqueda)\n" +
+                        "\tAdministración\n" +
                         "\tSalir\n");
 
         string option = Console.ReadLine();
@@ -57,7 +57,7 @@ class Program
         switch (option.ToLower())
         {
             case "crear":
-
+                Console.Write("Has seleccionado crear juego\n"); // Olalla
                 crear();
 
                 break;
@@ -78,7 +78,7 @@ class Program
                 break;
 
             case "busqueda":
-                    buscar();
+                buscar();
                 break;
             case "salir":
                 Console.WriteLine("Gracias por confiar en nosotros :D");
@@ -145,39 +145,60 @@ class Program
             verCatalogo(catalogo);
         }
 
-        if (contra == "salir"){
+        if (contra == "salir")
+        {  // Olalla
             menu();
         }
-        else if(pass != contra)
+        else if (pass != contra)
         {
             Console.WriteLine("Contraseña erronea, vuelve a intentarlo o escribe 'salir'");
             menu_3();
-        }
+        } // olalla
     }
     public static void crear()
     {
-        string name;
-        int initial;
-        decimal coste;
+
+        try
+        {
+            string name;
+            int initial;
+            decimal coste;
+
+            Console.Write("Indique el título del videojuego.\n");
+            name = Console.ReadLine();
+
+            foreach (var item in catalogo) // Olalla
+            {
+                //string compTitu = item.Titulo;
+
+                if (string.Equals(name, item.Titulo, StringComparison.OrdinalIgnoreCase))
+                {
+                    Console.WriteLine("El videojuego " + name + " ya existe en el catalogo");
+                    crear();
+                }
+            } // Olalla
 
 
-        Console.Write("Ha seleccionado crear un nuevo registro de videojuego.\n" +
-                    "\tIndique el título del videojuego.\n");
-        name = Console.ReadLine();
+            Console.WriteLine("\n\tIndique el número de unidades disponibles.");
+            initial = Convert.ToInt32(Console.ReadLine()); //Posible conflicto con el tipo de dato
 
-        Console.WriteLine("\n\tIndique el número de unidades disponibles.");
-        initial = Convert.ToInt32(Console.ReadLine()); //Posible conflicto con el tipo de dato
+            Console.WriteLine("\n\tIndique el precio de venta del videojuego.");
+            coste = Convert.ToDecimal(Console.ReadLine());
 
-        Console.WriteLine("\n\tIndique el precio de venta del videojuego.");
-        coste = Convert.ToDecimal(Console.ReadLine());
+            //a método crear()
+            var videojuego = new VideoJuego(name, initial, coste);
+            Console.WriteLine($"Videojuego (#{videojuego.Id}) {videojuego.Titulo} ha sido creado con {videojuego.Unidades} unidades por un precio unitario de {videojuego.PrecioVenta}€.");
 
-        //a método crear()
-        var videojuego = new VideoJuego(name, initial, coste);
-        Console.WriteLine($"Videojuego (#{videojuego.Id}) {videojuego.Titulo} ha sido creado con {videojuego.Unidades} unidades por un precio unitario de {videojuego.PrecioVenta}€.");
+            catalogo.Add(videojuego);
+            //catalogo.ToArray();
+            menu();
+        }
+        catch
+        {
+            Console.WriteLine("Has introducido datos erroneos");
+            crear();
+        }
 
-        catalogo.Add(videojuego);
-        //catalogo.ToArray();
-        menu();
     }
 
     public static void verCatalogo(List<VideoJuego> v)
@@ -215,6 +236,7 @@ class Program
 
     public static void añadir(VideoJuego v)
     {
+
         int añadido;
         string nota_añadir;
         Console.Write("Ha seleccionado añadir videojuego al catálogo.\n" +
@@ -227,12 +249,15 @@ class Program
         v.ComprarJuego(añadido, DateTime.Now, nota_añadir);
 
         menu_2(v); //El problema es que está metido en una función aparte
+
+
     }
 
     public static void sacar(VideoJuego v)
     {
         int gasto;
         string nota_gasto;
+
         Console.Write("Ha seleccionado retirar videojuego del catálogo.\n" +
                     "\tIndique la cantidad que desea retirar.\n");
         gasto = Convert.ToInt32(Console.ReadLine());
@@ -246,26 +271,30 @@ class Program
     }
 
 
-    public static void buscar(){
+    public static void buscar()
+    {
         Console.WriteLine("Introduce nombre de juego (al menos 3 letras): ");
         var tituloV = Console.ReadLine();
-        var rx = new Regex(@tituloV, RegexOptions.IgnoreCase);
+        var rx = new Regex(@tituloV, RegexOptions.IgnoreCase); // Olalla
 
-       Console.WriteLine("Estos son los resultados de la busqueda '"+tituloV+"': \n");
+        Console.WriteLine("Estos son los resultados de la busqueda '" + tituloV + "': \n"); //olalla
         foreach (var item in catalogo)
         {
             var word = item.Titulo;
+            var unidades = item.Unidades;
+            var prec = item.PrecioVenta;
             if (rx.IsMatch(word))
             {
-                Console.WriteLine(word);
+                Console.WriteLine($"TÍTULO \t\t UNIDADES DISPONIBLES \t PRECIO VENTA");
+                Console.WriteLine($"{item.Titulo} \t {item.Unidades} \t\t {item.PrecioVenta}");
             }
         }
-        menu();
+        menu(); //Olalla
     }
 
-    public static void serializar()
+    public static void serializar() // Olalla
     {
         string mijson = JsonSerializer.Serialize(catalogo);
         File.WriteAllText("Videojuegos", mijson);
-    }
+    } // Olalla
 }
