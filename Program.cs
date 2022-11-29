@@ -5,6 +5,7 @@ using System.Text.Json;
 using System.Text.RegularExpressions;
 
 namespace AA_ES;
+
 class Program
 {
     private static List<VideoJuego> catalogo = new List<VideoJuego>();
@@ -25,15 +26,6 @@ class Program
             catalogo.Add(VideoJuego3);
             catalogo.Add(VideoJuego4);
 
-            /*
-            foreach (var item in catalogo)
-            {
-                Console.WriteLine(item.Numero);
-                Console.WriteLine(item.Nombre);
-                Console.WriteLine(item.Precio);
-                Console.WriteLine(item.Unidades);
-            }
-            */
             menu();
         }
         catch (ArgumentOutOfRangeException e)
@@ -90,6 +82,7 @@ class Program
                 break;
             case "salir":
                 Console.WriteLine("Gracias por confiar en nosotros :D");
+                serializar();
                 break;
 
             default:
@@ -150,6 +143,15 @@ class Program
         {
             permiso = true;
             verCatalogo(catalogo);
+        }
+
+        if (contra == "salir"){
+            menu();
+        }
+        else if(pass != contra)
+        {
+            Console.WriteLine("Contraseña erronea, vuelve a intentarlo o escribe 'salir'");
+            menu_3();
         }
     }
     public static void crear()
@@ -245,18 +247,25 @@ class Program
 
 
     public static void buscar(){
-        Console.WriteLine("Introduce nombre de juego: ");
+        Console.WriteLine("Introduce nombre de juego (al menos 3 letras): ");
         var tituloV = Console.ReadLine();
-        var rx = new Regex(@tituloV, RegexOptions.Compiled);
+        var rx = new Regex(@tituloV, RegexOptions.IgnoreCase);
 
-       
+       Console.WriteLine("Estos son los resultados de la busqueda '"+tituloV+"': \n");
         foreach (var item in catalogo)
         {
             var word = item.Titulo;
-        if (rx.IsMatch(word))
+            if (rx.IsMatch(word))
             {
                 Console.WriteLine(word);
             }
         }
+        menu();
+    }
+
+    public static void serializar()
+    {
+        string mijson = JsonSerializer.Serialize(catalogo);
+        File.WriteAllText("Videojuegos", mijson);
     }
 }
