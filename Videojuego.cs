@@ -75,23 +75,28 @@ namespace AA_ES;
                 var compra = new Transaction(unidades, date);
                 allTransactions.Add(compra);
                 this.Unidades += unidades;
-            }catch (System.Exception){
-                
-            }
-                
+            }catch (ArgumentOutOfRangeException e){
+                Console.WriteLine("ArgumentOutOfRangeException: " + e.ToString());
+            }  
         }
 
-        public void VenderJuego(int unidades, DateTime date, string note)
-        {
-            if (unidades <= 0)
-            {
-                throw new ArgumentOutOfRangeException(nameof(unidades), "No puedes no comprar ningun juego");
+        public void VenderJuego(int unidades, DateTime date, string note){
+            try{
+            
+                if (unidades <= 0){
+                    throw new ArgumentOutOfRangeException(nameof(unidades), "No puedes no comprar ningun juego");
+                }
+                if (this.Unidades - unidades < 0){
+                    throw new InvalidOperationException("No hay suficientes unidades :(");
+                    
+                }
+            }catch (ArgumentOutOfRangeException e){
+                Console.WriteLine("ArgumentOutOfRangeException: " + e.ToString());
+            }catch(InvalidOperationException e){
+                Console.WriteLine("ArgumentOutOfRangeException: " + e.ToString());
             }
-            if (this.Unidades - unidades < 0)
-            {
-                throw new InvalidOperationException("No hay suficientes unidades :(");
-                
-            }
+
+            //¿Dentro del try-catch?
             var venta = new Transaction(-unidades, date);
             allTransactions.Add(venta);
             this.Unidades -= unidades;
