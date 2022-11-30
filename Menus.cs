@@ -7,23 +7,24 @@ using static AA_ES.Program;
 
 namespace AA_ES;
 
-class Menus 
+class Menus
 {
     private const string pass = "Micontra123";
     private static bool permiso = false;
 
-   
-    public static void menu_IniciarSesion(){
-    Console.Write("¿Qué operación desea hacer?\n" +
-                        "\tVer catálogo disponible (ver).\n" +
-                        "\tIniciar sesión (login).\n" +
-                        "\tSalir\n");
 
-                        string option = Console.ReadLine();
+    public static void menu_IniciarSesion()
+    {
+        Console.Write("¿Qué operación desea hacer?\n" +
+                            "\tVer catálogo disponible (ver).\n" +
+                            "\tIniciar sesión (login).\n" +
+                            "\tSalir.\n");
+
+        string option = Console.ReadLine();
 
         switch (option.ToLower())
         {
-          
+
             case "ver":
                 verCatalogo(catalogo);
                 break;
@@ -41,7 +42,7 @@ class Menus
                 break;
         }
 
-}
+    }
     public static void menu()
     {
         Console.Write("¿Qué operación desea hacer?\n" +
@@ -141,7 +142,43 @@ class Menus
         if (pass == contra)
         {
             permiso = true;
-            verCatalogo(catalogo);
+            Console.Write($"\n¿Qué operación desea hacer?\n" +
+                       "\tVer catalogo completo (ver).\n" +
+                       "\tVer usuarios (usuarios).\n" +
+                       "\tBorrar usuario(borrar)\n" +
+                       "\tSalir\n");
+
+            string option = Console.ReadLine();
+
+            switch (option.ToLower())
+            {
+
+                case "ver":
+                    verCatalogoSesion(catalogo);
+                    break;
+
+                case "usuarios":
+                    verUsuarios();
+
+                    break;
+
+                case "borrar":
+
+                    borrarUsuario();
+
+                    break;
+
+
+                case "salir":
+                    Console.WriteLine("\tHa seleccionado salir del programa.");
+                    menu();
+                    break;
+
+                default:
+                    Console.WriteLine("Operación no válida.");
+                    menu_3();
+                    break;
+            }
         }
 
         if (contra == "salir")
@@ -154,30 +191,26 @@ class Menus
             menu_3();
         } // olalla
     }
-    public static void iniciarSesion(){
+    public static void iniciarSesion()
+    {
 
         Console.Write("¿Qué quieres hacer?\n" +
-                       "\tIniciar sesion.\n" +
-                       "\tCrear cuenta.\n" +
-                       "\tSalir");
+                       "\tIniciar sesion. (iniciar)\n" +
+                       "\tCrear cuenta. (registrar)\n" +
+                       "\tSalir (salir)\n");
         string option = Console.ReadLine();
         switch (option.ToLower())
         {
             case "iniciar":
-                 iniciar();
-
-
+                iniciar();
                 break;
 
-            case "crear":
+            case "registrar":
                 crearCuenta();
-
                 break;
-
 
             case "salir":
                 Console.WriteLine("Gracias por confiar en nosotros :D");
-
                 break;
 
             default:
@@ -188,23 +221,83 @@ class Menus
 
     }
 
-    public static void iniciar(){
+    public static void iniciar()
+    {
         Console.WriteLine("Introduce nombre usuario");
         var nombreUser = Console.ReadLine();
         Console.WriteLine("Introduce contraseña usuario");
         var contraUser = Console.ReadLine();
         foreach (var item in allUsers)
         {
-            if (nombreUser == item.Nombre && contraUser==item.Contra){
+            if (nombreUser == item.Nombre && contraUser == item.Contra)
+            {
                 menu();
             }
             Console.WriteLine("Los datos introducidos son erroneos");
             iniciar();
         }
-        
+
     }
 
-    public static void crearCuenta(){
-        
+    public static void crearCuenta()
+    {
+        try
+        {
+            Console.WriteLine("Introduce nombre usuario");
+            var nombreUser = Console.ReadLine();
+            Console.WriteLine("Introduce contraseña usuario");
+            var contraUser = Console.ReadLine();
+            var nuevoUsuario = new Usuarios(nombreUser, contraUser, DateTime.Now);
+            allUsers.Add(nuevoUsuario);
+            menu();
+        }
+
+        catch (Exception e)
+        {
+            Console.WriteLine("Datos introducidos erroneos");
+            crearCuenta();
+        }
+        iniciar();
+    }
+
+    public static void verUsuarios()
+    {
+        foreach (var item in allUsers)
+        {
+            Console.WriteLine($"{item.IdentificadorUser} \t {item.Nombre} \t\t {item.Date}");
+        }
+        Console.WriteLine("\n");
+        menu_3();
+    }
+    public static void borrarUsuario()
+    {
+        Console.WriteLine("ID \t NOMBRE \t\t FECHA CREACIÓN");
+        foreach (var item in allUsers)
+        {           
+            Console.WriteLine($"{item.IdentificadorUser} \t {item.Nombre} \t\t {item.Date}");
+
+
+        }
+        Console.WriteLine("\n");
+        Console.WriteLine("¿Que usuario quieres borrar? Ingresa la ID");
+        var idborrar = Console.ReadLine();
+        try
+        {
+            foreach (var item in allUsers)
+            {
+                if (idborrar == item.IdentificadorUser)
+                {
+                    allUsers.Remove(item);
+                }
+            }
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine("No se ha podido borrar el usuario");
+            borrarUsuario();
+        }
+        Console.WriteLine("El usuario ha sido borrado correctamente :)");
+        menu_3();
+
     }
 }

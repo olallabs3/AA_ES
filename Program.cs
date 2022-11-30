@@ -206,7 +206,6 @@ class Program
         }
 
     }
-
     public static void verCatalogo(List<VideoJuego> v)
     {
         Console.WriteLine($"ID \t TÍTULO \t UNIDADES \t PRECIO VENTA");

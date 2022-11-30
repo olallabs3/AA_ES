@@ -8,9 +8,9 @@ namespace AA_ES;
 
 class Usuarios
 {
-    public int IdentificadorUser {get;}
+    public string IdentificadorUser {get;}
     public string Nombre { get; set;}
-     public string Contra { get; set;}
+    public string Contra { get; set;}
     public DateTime Date { get; }
 
     private static int incrementarid = 1;
@@ -18,7 +18,7 @@ class Usuarios
 
     public Usuarios(string nombre, string contra, DateTime date)
     {
-        IdentificadorUser = incrementarid;
+        IdentificadorUser = incrementarid.ToString();
         incrementarid++;
         Nombre = nombre;
         Contra = contra;
