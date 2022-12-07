@@ -84,6 +84,8 @@ class Menus
             case "salir":
                 Console.WriteLine("Gracias por confiar en nosotros :D");
                 serializar();
+                Environment.Exit(-1);
+
                 break;
 
             default:
