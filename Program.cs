@@ -18,6 +18,7 @@ class Program
     {
         try
         {
+            //El ÚNICO superadmin
             var usuarioAdmin = new Usuarios("Administrador","1234",DateTime.Now);
 
             allUsers.Add(usuarioAdmin);
@@ -48,119 +49,6 @@ class Program
         }
     }
 
-    // public static void menu()
-    // {
-    //     Console.Write("¿Qué operación desea hacer?\n" +
-    //                     "\tVer catálogo disponible (ver).\n" +
-    //                     "\tNueva entrada (crear).\n" +
-    //                     "\tSeleccionar videojuego (seleccionar)\n" +
-    //                     "\tBuscar juego (busqueda)\n" +
-    //                     "\tAdministración\n" +
-    //                     "\tSalir\n");
-
-    //     string option = Console.ReadLine();
-
-    //     switch (option.ToLower())
-    //     {
-    //         case "crear":
-    //             Console.Write("Has seleccionado crear juego\n"); // Olalla
-    //             crear();
-
-    //             break;
-
-    //         case "ver":
-    //             verCatalogo(catalogo);
-
-    //             break;
-
-    //         case "seleccionar":
-    //             Console.WriteLine("Seleccione el ID del artículo al que quiere acceder");
-    //             menu_2(catalogo[int.Parse(Console.ReadLine()) - 1]); //Intenta seleccionar la cuenta deseada del array
-    //             break;
-
-    //         case "gestiones":
-    //             menu_3();
-
-    //             break;
-
-    //         case "busqueda":
-    //             buscar();
-    //             break;
-    //         case "salir":
-    //             Console.WriteLine("Gracias por confiar en nosotros :D");
-    //             serializar();
-    //             break;
-
-    //         default:
-    //             Console.WriteLine("Operación no válida.");
-    //             menu();
-    //             break;
-    //     }
-    // }
-    // public static void menu_2(VideoJuego v)
-    // {
-
-    //     Console.Write($"Has seleccionado el videojuego (#{v.Id}) {v.Titulo} de precio {v.PrecioVenta} y {v.Unidades} unidades restantes." +
-    //                     "\n¿Qué operación desea hacer?\n" +
-    //                     "\tAñadir unidades (añadir).\n" +
-    //                     "\tSacar unidades (sacar).\n" +
-    //                     "\tVer registro de transacciones (transacciones)\n" +
-    //                     "\tSalir\n");
-
-    //     string option = Console.ReadLine();
-
-    //     switch (option.ToLower())
-    //     {
-
-    //         case "añadir":
-
-    //             añadir(v);
-
-    //             break;
-
-    //         case "sacar":
-
-    //             sacar(v);
-
-    //             break;
-
-    //         case "transacciones" or "registro": //Ojo que igual no va
-    //             Console.WriteLine(v.GetHistory());
-    //             menu_2(v);
-    //             break;
-
-    //         case "salir":
-    //             Console.WriteLine("\tHa seleccionado salir del programa.");
-    //             menu();
-    //             break;
-
-    //         default:
-    //             Console.WriteLine("Operación no válida.");
-    //             menu_2(v);
-    //             break;
-    //     }
-    // }
-
-    // public static void menu_3()
-    // {
-    //     Console.WriteLine("Introduce contraseña: ");
-    //     var contra = Console.ReadLine();
-    //     if (pass == contra)
-    //     {
-    //         permiso = true;
-    //         verCatalogo(catalogo);
-    //     }
-
-    //     if (contra == "salir")
-    //     {  // Olalla
-    //         menu();
-    //     }
-    //     else if (pass != contra)
-    //     {
-    //         Console.WriteLine("Contraseña erronea, vuelve a intentarlo o escribe 'salir'");
-    //         menu_3();
-    //     } // olalla
-    // }
     public static void crear()
     {
 
@@ -186,7 +74,7 @@ class Program
 
 
             Console.WriteLine("\n\tIndique el número de unidades disponibles.");
-            initial = Convert.ToInt32(Console.ReadLine()); //Posible conflicto con el tipo de dato
+            initial = Convert.ToInt32(Console.ReadLine());
 
             Console.WriteLine("\n\tIndique el precio de venta del videojuego.");
             coste = Convert.ToDecimal(Console.ReadLine());
@@ -261,11 +149,6 @@ class Program
         permiso = false;
         menu();
     }
-    /* Creo que no lo llego a usar, es menu2
-    public static string acceder(){
-        Console.WriteLine($"Seleccione el ID de la cuenta a la que quiere acceder.\n");
-        return Console.ReadLine();
-    }*/
 
     public static void añadir(VideoJuego v)
     {

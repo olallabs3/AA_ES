@@ -12,6 +12,7 @@ class Usuarios
     public string Nombre { get; set;}
     public string Contra { get; set;}
     public DateTime Date { get; }
+    public bool admin { get; }
 
     private static int incrementarid = 1;
 
@@ -23,6 +24,13 @@ class Usuarios
         Nombre = nombre;
         Contra = contra;
         Date = date;
+
+        //Sólo hay un superadmin, el primero que me creo al principio de la ejecución del Program.cs
+        if(this.IdentificadorUser == "1"){
+            admin = true;
+        }else{
+            admin = false;
+        }
     }
 
 }
