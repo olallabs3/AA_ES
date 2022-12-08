@@ -194,6 +194,7 @@ class Menus
 
             case "salir":
                 Console.WriteLine("Gracias por confiar en nosotros :D");
+                Environment.Exit(-1);
                 break;
                 
                 default:
@@ -210,33 +211,39 @@ class Menus
         var nombreUser = Console.ReadLine();
         Console.WriteLine("Introduce contraseña usuario");
         var contraUser = Console.ReadLine();
-        foreach (var item in allUsers)
-        {
-            // if (item.IdentificadorUser == "1"){
-            //     menu_3();
-                
-            // }
-            if (item.Nombre == "Administrador" && item.Contra =="1234"){
+
+        if (nombreUser == "Administrador" && contraUser =="1234"){
                 menu_3();
-            }
-            else 
-            if (nombreUser == item.Nombre && contraUser == item.Contra)
-            {
+        }
+
+        /*if(allUsers.Contains(Nombre* == nombreUser)){
+            Console.WriteLine("No existe el usuario");
+            iniciar();
+        }*/
+
+        foreach (var item in allUsers){
+
+            if (nombreUser == item.Nombre && contraUser == item.Contra){
                 menu();
             }
+        }
+        Console.Write($"\nLos datos introducidos son erroneos\n" +
+                        "\tReintentar.\n" +
+                        "\tSalir (salir).\n");
 
-            if(nombreUser != item.Nombre){
-                Console.WriteLine("No existe el usuario");
-                iniciar();
-            }
-            Console.WriteLine("Los datos introducidos son erroneos");
+        var ans = Console.ReadLine();
+        if(ans.ToLower() == "salir"){
+            iniciarSesion();
+        }else{
             iniciar();
         }
 
+        /*Console.WriteLine("Los datos introducidos son erroneos");
+        Console.Write("");
+        iniciar();*/
     }
 
-    public static void crearCuenta()
-    {
+    public static void crearCuenta(){
         try
         {
             Console.WriteLine("Introduce nombre usuario");

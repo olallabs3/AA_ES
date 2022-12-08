@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\HOME\\Desktop\\Olalla\\AA_ES\\AA_ES.csproj": {}
+    "C:\\DAW\\AA_ES\\AA_ES.csproj": {}
   },
   "projects": {
-    "C:\\Users\\HOME\\Desktop\\Olalla\\AA_ES\\AA_ES.csproj": {
+    "C:\\DAW\\AA_ES\\AA_ES.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\HOME\\Desktop\\Olalla\\AA_ES\\AA_ES.csproj",
+        "projectUniqueName": "C:\\DAW\\AA_ES\\AA_ES.csproj",
         "projectName": "AA_ES",
-        "projectPath": "C:\\Users\\HOME\\Desktop\\Olalla\\AA_ES\\AA_ES.csproj",
-        "packagesPath": "C:\\Users\\HOME\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\HOME\\Desktop\\Olalla\\AA_ES\\obj\\",
+        "projectPath": "C:\\DAW\\AA_ES\\AA_ES.csproj",
+        "packagesPath": "C:\\Users\\gonza\\.nuget\\packages\\",
+        "outputPath": "C:\\DAW\\AA_ES\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\HOME\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\gonza\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
@@ -53,7 +53,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.403\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.401\\RuntimeIdentifierGraph.json"
         }
       }
     }
