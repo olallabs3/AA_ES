@@ -25,7 +25,7 @@ class Usuarios
         Contra = contra;
         Date = date;
 
-        //Sólo hay un superadmin, el primero que me creo al principio de la ejecución del Program.cs
+        //Sólo hay un superadmin, el primero que se creo al principio de la ejecución del Program.cs
         if(this.IdentificadorUser == "1"){
             admin = true;
         }else{

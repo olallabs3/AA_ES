@@ -1,0 +1,15 @@
+C:\Users\HOME\Desktop\Olalla\AA_ES\bin\Debug\net6.0\AA_ES.exe
+C:\Users\HOME\Desktop\Olalla\AA_ES\bin\Debug\net6.0\AA_ES.deps.json
+C:\Users\HOME\Desktop\Olalla\AA_ES\bin\Debug\net6.0\AA_ES.runtimeconfig.json
+C:\Users\HOME\Desktop\Olalla\AA_ES\bin\Debug\net6.0\AA_ES.dll
+C:\Users\HOME\Desktop\Olalla\AA_ES\bin\Debug\net6.0\AA_ES.pdb
+C:\Users\HOME\Desktop\Olalla\AA_ES\obj\Debug\net6.0\AA_ES.csproj.AssemblyReference.cache
+C:\Users\HOME\Desktop\Olalla\AA_ES\obj\Debug\net6.0\AA_ES.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\HOME\Desktop\Olalla\AA_ES\obj\Debug\net6.0\AA_ES.AssemblyInfoInputs.cache
+C:\Users\HOME\Desktop\Olalla\AA_ES\obj\Debug\net6.0\AA_ES.AssemblyInfo.cs
+C:\Users\HOME\Desktop\Olalla\AA_ES\obj\Debug\net6.0\AA_ES.csproj.CoreCompileInputs.cache
+C:\Users\HOME\Desktop\Olalla\AA_ES\obj\Debug\net6.0\AA_ES.dll
+C:\Users\HOME\Desktop\Olalla\AA_ES\obj\Debug\net6.0\refint\AA_ES.dll
+C:\Users\HOME\Desktop\Olalla\AA_ES\obj\Debug\net6.0\AA_ES.pdb
+C:\Users\HOME\Desktop\Olalla\AA_ES\obj\Debug\net6.0\AA_ES.genruntimeconfig.cache
+C:\Users\HOME\Desktop\Olalla\AA_ES\obj\Debug\net6.0\ref\AA_ES.dll

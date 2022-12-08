@@ -20,7 +20,6 @@ class Program
         {
             //El ÚNICO superadmin
             var usuarioAdmin = new Usuarios("Administrador","1234",DateTime.Now);
-
             allUsers.Add(usuarioAdmin);
 
             var VideoJuego1 = new VideoJuego("Apex Legends", 3, 10.99m);
@@ -61,7 +60,7 @@ class Program
             Console.Write("Indique el título del videojuego.\n");
             name = Console.ReadLine();
 
-            foreach (var item in catalogo) // Olalla
+            foreach (var item in catalogo) 
             {
                 //string compTitu = item.Titulo;
 
@@ -70,7 +69,7 @@ class Program
                     Console.WriteLine("El videojuego " + name + " ya existe en el catalogo");
                     crear();
                 }
-            } // Olalla
+            } 
 
 
             Console.WriteLine("\n\tIndique el número de unidades disponibles.");
@@ -85,7 +84,7 @@ class Program
 
             catalogo.Add(videojuego);
             //catalogo.ToArray();
-            menu();
+            menu_3();
         }
         catch
         {
@@ -123,7 +122,8 @@ class Program
     }
 
      public static void verCatalogoSesion(List<VideoJuego> v)
-    {
+    { 
+        permiso = true;
         Console.WriteLine($"ID \t TÍTULO \t UNIDADES \t PRECIO VENTA");
 
         if (permiso == true)
@@ -147,7 +147,7 @@ class Program
         }
 
         permiso = false;
-        menu();
+        menu_3();
     }
 
     public static void añadir(VideoJuego v)
@@ -164,9 +164,7 @@ class Program
 
         v.ComprarJuego(añadido, DateTime.Now, nota_añadir);
 
-        menu_2(v); //El problema es que está metido en una función aparte
-
-
+        menu_2(v); 
     }
 
     public static void sacar(VideoJuego v)
@@ -191,9 +189,9 @@ class Program
     {
         Console.WriteLine("Introduce nombre de juego (al menos 3 letras): ");
         var tituloV = Console.ReadLine();
-        var rx = new Regex(@tituloV, RegexOptions.IgnoreCase); // Olalla
+        var rx = new Regex(@tituloV, RegexOptions.IgnoreCase); 
 
-        Console.WriteLine("Estos son los resultados de la busqueda '" + tituloV + "': \n"); //olalla
+        Console.WriteLine("Estos son los resultados de la busqueda '" + tituloV + "': \n"); // a
         foreach (var item in catalogo)
         {
             var word = item.Titulo;
@@ -206,12 +204,12 @@ class Program
             }
         }
         Console.WriteLine("\n");
-        menu(); //Olalla
+        menu();
     }
 
-    public static void serializar() // Olalla
+    public static void serializar() 
     {
         string mijson = JsonSerializer.Serialize(catalogo);
         File.WriteAllText("Videojuegos", mijson);
-    } // Olalla
+    } 
 }
