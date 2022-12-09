@@ -21,28 +21,34 @@ namespace AA_ES;
 
         public VideoJuego(string nombre, int unidades, decimal precio)
         {
+        
             this.Id = accountNumberSeed.ToString();
             accountNumberSeed++;
             this.Titulo = nombre;
-            this.Unidades = 0;
             this.PrecioVenta = precio;
+            this.Unidades = 0;
             ComprarJuego(unidades, DateTime.Now, " cantidad");
             this.agotado = false;
-        }
 
-        public void ComprarJuego(int unidades, DateTime date, string note)
+    }
+
+    public void ComprarJuego(int unidades, DateTime date, string note)
         {
+            //try catch
+            //Comprobar valor negativo
             if (unidades <= 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(unidades), "No puedes no adquirir ningun juego");
+                throw new ArgumentOutOfRangeException(nameof(unidades), "No puedes no comprar ningun juego");
             }
             var compra = new Transaction(unidades, date);
             allTransactions.Add(compra);
-            this.Unidades +=unidades;
+            this.Unidades += unidades;
         }
 
         public void VenderJuego(int unidades, DateTime date, string note)
         {
+              //try catch
+            //Comprobar valor negativo
             if (unidades <= 0)
             {
                 throw new ArgumentOutOfRangeException(nameof(unidades), "No puedes no comprar ningun juego");
@@ -65,7 +71,7 @@ namespace AA_ES;
             var report = new StringBuilder();
 
             decimal balance = 0;
-            report.AppendLine("Unidades\tTítulo\tPrecio Unidad");
+            report.AppendLine("Unidades\tTítulo\tPrecio unidad");
             foreach (var item in allTransactions)
             {
                 balance += item.Unidades;
