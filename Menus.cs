@@ -60,7 +60,7 @@ class Menus
 
             case "salir":
                 Console.WriteLine("Gracias por confiar en nosotros :D");
-                menu_IniciarSesion();
+                Environment.Exit(-1);
                 break;
                 
                 default:
@@ -147,7 +147,6 @@ class Menus
                 buscar();
                 break;
             case "salir":
-                Console.WriteLine("Gracias por confiar en nosotros :D");
                 serializar();
                 iniciarSesion();
                 //Environment.Exit(-1);
