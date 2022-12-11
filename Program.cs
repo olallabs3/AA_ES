@@ -12,8 +12,6 @@ class Program
 {
     public static List<VideoJuego> catalogo = new List<VideoJuego>();
     public static List<Usuarios> allUsers = new List<Usuarios>();
-    private static bool permiso = false;
-    private const string pass = "Micontra123";
     static void Main(string[] args)
     {
         try
@@ -31,6 +29,7 @@ class Program
             catalogo.Add(VideoJuego2);
             catalogo.Add(VideoJuego3);
             catalogo.Add(VideoJuego4);
+            serializar();
 
             Menus.menu_IniciarSesion();
         }
@@ -48,6 +47,7 @@ class Program
         }
     }
 
+    // Crear un nuevo videojuego
     public static void crear()
     {
 
@@ -83,7 +83,7 @@ class Program
             Console.WriteLine($"Videojuego (#{videojuego.Id}) {videojuego.Titulo} ha sido creado con {videojuego.Unidades} unidades por un precio unitario de {videojuego.PrecioVenta}€.");
 
             catalogo.Add(videojuego);
-            //catalogo.ToArray();
+            serializar();
             menu_3();
         }
         catch
@@ -93,17 +93,21 @@ class Program
         }
 
     }
+
+    // Ver el catálogo con y sin los agotados
     public static void verCatalogo(List<VideoJuego> v)
     {
         Console.WriteLine($"ID \t TÍTULO \t UNIDADES \t PRECIO VENTA");
 
-        if (permiso == true)
+        if (Menus.permiso == true)
         {
             for (int i = 0; i < v.Count; i++)
             {
                 var item = v[i];
                 Console.WriteLine($"{item.Id} \t {item.Titulo} \t {item.Unidades} \t\t {item.PrecioVenta}");
             }
+            Menus.permiso = false;
+            menu_3();
         }
         else
         {
@@ -115,41 +119,12 @@ class Program
                     Console.WriteLine($"{item.Id} \t {item.Titulo} \t {item.Unidades} \t\t {item.PrecioVenta}");
                 }
             }
+            Menus.permiso = false;
+            menu();
         }
-
-        permiso = false;
-        menu_IniciarSesion();
     }
 
-     public static void verCatalogoSesion(List<VideoJuego> v)
-    { 
-        permiso = true;
-        Console.WriteLine($"ID \t TÍTULO \t UNIDADES \t PRECIO VENTA");
-
-        if (permiso == true)
-        {
-            for (int i = 0; i < v.Count; i++)
-            {
-                var item = v[i];
-                Console.WriteLine($"{item.Id} \t {item.Titulo} \t {item.Unidades} \t\t {item.PrecioVenta}");
-            }
-        }
-        else
-        {
-            for (int i = 0; i < v.Count; i++)
-            {
-                var item = v[i];
-                if (item.agotado == false)
-                {
-                    Console.WriteLine($"{item.Id} \t {item.Titulo} \t {item.Unidades} \t\t {item.PrecioVenta}");
-                }
-            }
-        }
-
-        permiso = false;
-        menu_3();
-    }
-
+    // Añade unidades a un videojuego ya existente (parámetro de entrada)
     public static void añadir(VideoJuego v)
     {
 
@@ -163,10 +138,11 @@ class Program
         nota_añadir = Console.ReadLine();
 
         v.ComprarJuego(añadido, DateTime.Now, nota_añadir);
-
+        serializar();
         menu_2(v); 
     }
 
+    // Sustrae unidades a un videojuego ya existente (parámetro de entrada)
     public static void sacar(VideoJuego v)
     {
         int gasto;
@@ -180,11 +156,11 @@ class Program
         nota_gasto = Console.ReadLine();
 
         v.VenderJuego(gasto, DateTime.Now, nota_gasto);
-
+        serializar();
         menu_2(v);
     }
 
-
+    // Busca entre todos los juegos (agotados incluidos) con expresión regular (Regex)
     public static void buscar()
     {
         Console.WriteLine("Introduce nombre de juego (al menos 3 letras): ");
@@ -207,9 +183,10 @@ class Program
         menu();
     }
 
+    // Guarda los datos en el fichero Videojuegos.json Se pierden cuando lanzas el programa otra vez.
     public static void serializar() 
     {
         string mijson = JsonSerializer.Serialize(catalogo);
-        File.WriteAllText("Videojuegos", mijson);
+        File.WriteAllText("Videojuegos.json", mijson);
     } 
 }
